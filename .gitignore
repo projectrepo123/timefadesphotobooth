@@ -1,0 +1,7 @@
+.DS_Store
+Thumbs.db
+
+# Stale offline-demo mirror still bundles unlicensed competitor stock
+# photos that were removed from images/ - keep out of git history.
+/offline-demo/
+/TimeFadesPhoto-offline.zip

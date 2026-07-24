@@ -1,0 +1,586 @@
+<!--
+/* ==========================================
+   TIME FADES PHOTOBOOTH
+   JB Web Co. - jbwebco.com
+   First-draft marketing site (vanilla HTML/CSS/JS)
+   ==========================================
+   Business Name: Time Fades Photobooth
+   Owner: Jim
+   Tagline: Remember When... Before Time Fades Away
+   Domain (placeholder): timefadesphoto.com
+   ==========================================
+   PLACEHOLDERS TO FILL BEFORE LAUNCH:
+     [PLACEHOLDER_EMAIL]     - contact email
+     [PLACEHOLDER_PHONE]     - contact phone (display + tel: link)
+     [PLACEHOLDER_FACEBOOK]  - Facebook page URL
+     [PLACEHOLDER_INSTAGRAM] - Instagram page URL
+     [PLACEHOLDER_GOOGLE]    - Google Business page URL
+     [FORMSPREE_ENDPOINT_PLACEHOLDER] - real Formspree form endpoint (see script.js)
+     About-section polaroid - swap SVG placeholder for a real photo
+   ========================================== */
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- SEO PLACEHOLDERS to confirm before launch: canonical domain,
+       phone/email in JSON-LD + contact, social URLs (sameAs),
+       og:image (swap logo for a real 1200x630 event photo). -->
+  <title>Photo Booth Rental in St. Louis, St. Charles &amp; Jefferson County | Time Fades Photobooth</title>
+  <meta name="description" content="Warm, fully attended photo booth rental for weddings & celebrations across St. Louis County, St. Charles County and Jefferson County, Missouri. Instant high-quality prints, boomerangs, video and custom keepsakes, no fuss.">
+  <link rel="canonical" href="https://timefadesphoto.com/">
+  <meta name="robots" content="index, follow">
+
+  <!-- Local signals -->
+  <meta name="geo.region" content="US-MO">
+  <meta name="geo.placename" content="St. Louis, Missouri">
+
+  <!-- Open Graph / social sharing -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Time Fades Photobooth">
+  <meta property="og:title" content="Time Fades Photobooth | Remember When… Before Time Fades Away">
+  <meta property="og:description" content="Warm, fully attended photo booth rental for weddings & celebrations across the St. Louis area. Instant prints and keepsakes worth holding onto.">
+  <meta property="og:url" content="https://timefadesphoto.com/">
+  <meta property="og:image" content="https://timefadesphoto.com/time-fades-logo.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Time Fades Photobooth | Remember When… Before Time Fades Away">
+  <meta name="twitter:description" content="Warm, fully attended photo booth rental for weddings & celebrations across the St. Louis area.">
+  <meta name="twitter:image" content="https://timefadesphoto.com/time-fades-logo.jpg">
+
+  <!-- Fonts: Google Fonts CDN for the first draft.
+       Can be self-hosted later for performance / privacy. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Source+Sans+3:wght@400;500;600;700&family=Special+Elite&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="/time-fades-logo.jpg">
+  <link rel="apple-touch-icon" href="/time-fades-logo.jpg">
+
+  <!-- LocalBusiness structured data - powers local/Maps SEO. Fill the
+       real phone, email and social URLs before launch. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Time Fades Photobooth",
+    "description": "Warm, fully attended photo booth rental for weddings and celebrations across the St. Louis, Missouri area.",
+    "url": "https://timefadesphoto.com/",
+    "image": "https://timefadesphoto.com/time-fades-logo.jpg",
+    "logo": "https://timefadesphoto.com/time-fades-logo.jpg",
+    "telephone": "+1-636-232-4501",
+    "email": "hello@timefadesphoto.com",
+    "priceRange": "$$",
+    "slogan": "Remember When… Before Time Fades Away",
+    "address": {
+      "@type": "PostalAddress",
+      "addressRegion": "MO",
+      "addressCountry": "US"
+    },
+    "areaServed": [
+      { "@type": "AdministrativeArea", "name": "St. Louis County, Missouri" },
+      { "@type": "AdministrativeArea", "name": "St. Charles County, Missouri" },
+      { "@type": "AdministrativeArea", "name": "Jefferson County, Missouri" }
+    ],
+    "knowsAbout": ["Photo booth rental", "Wedding photo booth", "Event photo booth", "Instant photo prints"]
+  }
+  </script>
+</head>
+<body>
+
+  <!-- ============================================================
+       INLINE SVG SPRITE - the stamp/postmark logo, defined once
+       and re-used at different sizes via <use href="#stamp">.
+       Placeholder built from Jim's hand-drawn concept; swap for a
+       real vector logo file later.
+       ============================================================ -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <symbol id="stamp" viewBox="0 0 200 200">
+      <!-- dashed rubber-stamp border -->
+      <circle cx="100" cy="100" r="95" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="6 5"/>
+      <!-- thin inner rings -->
+      <circle cx="100" cy="100" r="86" fill="none" stroke="currentColor" stroke-width="1"/>
+      <circle cx="100" cy="100" r="55" fill="none" stroke="currentColor" stroke-width="1"/>
+      <!-- invisible arcs used as baselines for the curved text -->
+      <path id="stampTopArc" fill="none" d="M 22,100 A 78,78 0 0 1 178,100"/>
+      <path id="stampBottomArc" fill="none" d="M 178,100 A 78,78 0 0 1 22,100"/>
+      <g fill="currentColor">
+        <text class="stamp-arc" font-size="15">
+          <textPath href="#stampTopArc" startOffset="50%" text-anchor="middle">REMEMBER  WHEN</textPath>
+        </text>
+        <text class="stamp-arc" font-size="12">
+          <textPath href="#stampBottomArc" startOffset="50%" text-anchor="middle">BEFORE TIME FADES AWAY</textPath>
+        </text>
+        <!-- flanking stars beside the center block -->
+        <text x="34" y="105" font-size="14" text-anchor="middle">✦</text>
+        <text x="166" y="105" font-size="14" text-anchor="middle">✦</text>
+        <!-- center wordmark -->
+        <text class="stamp-center" x="100" y="94" font-size="24" text-anchor="middle">TIME FADES</text>
+        <text class="stamp-center" x="100" y="120" font-size="17" text-anchor="middle" letter-spacing="1.5">PHOTOBOOTH</text>
+      </g>
+    </symbol>
+  </svg>
+
+  <!-- ============================================================
+       1. NAV
+       ============================================================ -->
+  <header class="nav" id="top">
+    <a class="nav__brand" href="/#top" aria-label="Time Fades Photobooth home">
+      <img class="nav__mark" src="time-fades-logo.jpg" alt="" width="200" height="224">
+      <span class="nav__word">Time&nbsp;Fades<span>Photobooth</span></span>
+    </a>
+
+    <button class="nav__toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav class="nav__menu" id="navMenu" aria-label="Primary">
+      <a href="/#why">Why Us</a>
+      <a href="/#services">Services</a>
+      <a href="/features.html">Features</a>
+      <a href="/#gallery">Gallery</a>
+      <a href="/#about">About</a>
+      <a href="/#contact">Contact</a>
+      <a class="btn btn--solid nav__cta" href="/#contact">Get a Quote</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ============================================================
+         2. HERO - the stamp mark is the dominant visual anchor,
+         headline set asymmetrically beside it (left-weighted).
+         ============================================================ -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero__inner">
+        <div class="hero__copy">
+          <p class="eyebrow">Est. for the moments worth keeping</p>
+          <h1 id="hero-title" class="hero__title">Remember<br>When<span class="hero__dots">…</span></h1>
+          <p class="hero__sub">Before time fades away.</p>
+          <p class="hero__lead">Professional photobooth service for weddings, celebrations,
+            and the everyday moments that turn out to matter most.</p>
+          <div class="hero__cta">
+            <a class="btn btn--solid" href="#contact">Get a Quote</a>
+            <a class="btn btn--outline" href="#services">See Our Packages</a>
+          </div>
+        </div>
+        <div class="hero__mark" aria-hidden="true">
+          <img src="time-fades-logo.jpg" alt="" width="200" height="224">
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         3. WHY US / PHILOSOPHY - asymmetric icon+line list, left
+         aligned. Jim's plain-spoken "no hype" voice.
+         ============================================================ -->
+    <section class="why" id="why" aria-labelledby="why-title">
+      <div class="why__inner">
+        <div class="why__head">
+          <p class="eyebrow">Why folks choose us</p>
+          <h2 id="why-title">No glitter. No hype.<br>Just good photos, done right.</h2>
+          <p class="why__intro">We'll be honest with you: a lot of photobooth outfits lean on
+            flash and fuss. That's not us. We keep it simple and do the parts that
+            actually matter, so your guests remember the night and not the gadgets.</p>
+        </div>
+
+        <ul class="why__list">
+          <li class="why__item">
+            <span class="why__icon" aria-hidden="true">
+              <!-- Lucide "camera" (ISC) -->
+              <svg viewBox="0 0 24 24"><path d="M13.997 4a2 2 0 0 1 1.76 1.05l.486.9A2 2 0 0 0 18.003 7H20a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h1.997a2 2 0 0 0 1.759-1.048l.489-.904A2 2 0 0 1 10.004 4z"/><circle cx="12" cy="13" r="3"/></svg>
+            </span>
+            <div>
+              <h3>Real, professional gear</h3>
+              <p>Digital cameras and printers that produce sharp, high-quality prints
+                on the spot, not toy setups.</p>
+            </div>
+          </li>
+          <li class="why__item">
+            <span class="why__icon" aria-hidden="true">
+              <!-- Lucide "printer" (ISC) -->
+              <svg viewBox="0 0 24 24"><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6"/><rect x="6" y="14" width="12" height="8" rx="1"/></svg>
+            </span>
+            <div>
+              <h3>Instant prints in hand</h3>
+              <p>Guests walk away with a photo the same evening, something real to
+                keep, not just a file that gets lost on a phone.</p>
+            </div>
+          </li>
+          <li class="why__item">
+            <span class="why__icon" aria-hidden="true">
+              <!-- Lucide "handshake" (ISC) -->
+              <svg viewBox="0 0 24 24"><path d="m11 17 2 2a1 1 0 1 0 3-3"/><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4"/><path d="m21 3 1 11h-2"/><path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3"/><path d="M3 4h8"/></svg>
+            </span>
+            <div>
+              <h3>A real person behind it</h3>
+              <p>We set everything up, run it all night, and pack it away. You host;
+                we handle the rest. No worries, no fuss.</p>
+            </div>
+          </li>
+          <li class="why__item">
+            <span class="why__icon" aria-hidden="true">
+              <!-- Lucide "sliders-horizontal" (ISC) -->
+              <svg viewBox="0 0 24 24"><path d="M10 5H3"/><path d="M12 19H3"/><path d="M14 3v4"/><path d="M16 17v4"/><path d="M21 12h-9"/><path d="M21 19h-5"/><path d="M21 5h-7"/><path d="M8 10v4"/><path d="M8 12H3"/></svg>
+            </span>
+            <div>
+              <h3>Choices that fit your day</h3>
+              <p>Multiple packages to pick from, simple options, plainly priced, with
+                no pressure to buy more than you need.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         4. SERVICES / EVENT TYPES - tag/pill editorial list, made
+         to look nothing like section 3's icon rows.
+         ============================================================ -->
+    <section class="services" id="services" aria-labelledby="services-title">
+      <div class="services__inner">
+        <div class="services__lede">
+          <p class="eyebrow">Where we set up</p>
+          <h2 id="services-title">The kind of days we're made for</h2>
+          <p>If people are gathering to mark something, we're glad to be there. A few of
+            the events we're asked to bring the booth to:</p>
+        </div>
+
+        <ul class="tag-list" role="list">
+          <li>Wedding Receptions</li>
+          <li>Corporate Events</li>
+          <li>Award Ceremonies</li>
+          <li>Graduation Parties</li>
+          <li>Class Reunions</li>
+          <li>Community Events</li>
+          <li>Anniversaries</li>
+          <li>Church Gatherings</li>
+        </ul>
+
+        <p class="services__note">
+          Own or run a venue? We're always glad to talk about partnering, so your
+          guests have one less thing to arrange.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         5. FEATURES - two-column editorial list. No icon cards.
+         Dark band for contrast against neighbours.
+         ============================================================ -->
+    <section class="features" id="features" aria-labelledby="features-title">
+      <div class="features__inner">
+        <div class="features__head">
+          <p class="eyebrow eyebrow--light">The details</p>
+          <h2 id="features-title">Made to suit the occasion</h2>
+        </div>
+        <dl class="features__grid">
+          <div class="feature">
+            <dt>Custom borders</dt>
+            <dd>Every print can carry the couple's names, a date, an anniversary, a
+              company logo, a small touch that makes the photo unmistakably yours.</dd>
+          </div>
+          <div class="feature">
+            <dt>Lighting options</dt>
+            <dd>We bring flattering, adjustable lighting so people actually like how
+              they look: warm and natural, never harsh.</dd>
+          </div>
+          <div class="feature">
+            <dt>Custom backgrounds</dt>
+            <dd>Pick a backdrop that fits the room and the mood, from clean and classic
+              to something with a little more character.</dd>
+          </div>
+          <div class="feature">
+            <dt>Set-up-and-leave or fully attended</dt>
+            <dd>Want us to hand it off and step back? We can. Prefer someone tending it
+              all night? That's our favorite way to work.</dd>
+          </div>
+        </dl>
+        <p class="features__more">
+          <a href="/features.html">See everything the booth can do</a>
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         6. ABOUT / OUR STORY - emotional heart. Asymmetric:
+         polaroid-framed placeholder offset against left-aligned
+         first-person copy.
+         ============================================================ -->
+    <section class="about" id="about" aria-labelledby="about-title">
+      <div class="about__inner">
+        <div class="about__media" aria-hidden="true">
+          <!-- POLAROID PLACEHOLDER - swap this SVG for a real photo of
+               Jim & his wife (or an event) before launch. -->
+          <figure class="polaroid polaroid--a">
+            <div class="polaroid__img">
+              <svg viewBox="0 0 200 200" role="img" aria-label="Photo placeholder">
+                <rect width="200" height="200" fill="#e9e0cf"/>
+                <path d="M0 150l55-45 40 30 45-55 60 55v65H0z" fill="#cdbfa3"/>
+                <circle cx="150" cy="55" r="20" fill="#dccfae"/>
+              </svg>
+            </div>
+            <figcaption>Us, a while back</figcaption>
+          </figure>
+          <figure class="polaroid polaroid--b">
+            <div class="polaroid__img">
+              <svg viewBox="0 0 200 200" role="img" aria-label="Photo placeholder">
+                <rect width="200" height="200" fill="#ded2b8"/>
+                <circle cx="70" cy="80" r="26" fill="#c9b892"/>
+                <circle cx="120" cy="86" r="30" fill="#bda87f"/>
+                <path d="M0 160h200v40H0z" fill="#c4b48c"/>
+              </svg>
+            </div>
+            <figcaption>The reason we started</figcaption>
+          </figure>
+        </div>
+
+        <div class="about__copy">
+          <p class="eyebrow">Our story</p>
+          <h2 id="about-title">We learned this one the hard way</h2>
+          <p>We're an older couple, and if we're being truthful, we didn't take nearly
+            enough photos when it counted. The weddings, the birthdays, the ordinary
+            Sunday afternoons, so many of them live only in our memory now, and memory
+            has a way of going soft around the edges.</p>
+          <p>By the time we realized it, a lot of those moments were already gone. You
+            can't go back and take the picture you didn't take. That stayed with us.</p>
+          <p>So we started Time Fades Photobooth, not to sell anyone a party trick, but
+            to help other families end the night holding something real. A print you can
+            put on the refrigerator. A face your grandchildren will recognize one day.
+            The people we love get to keep living on in these pictures, long after the
+            words we said to each other have faded.</p>
+          <p class="about__close">Time fades away. Your photos don't have to.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         6b. GALLERY / "SEE IT IN ACTION" - motion + photos, framed
+         as scattered polaroids so it belongs to the warm, vintage
+         look rather than fighting it.
+
+         Real photos from Jim's own events: a wedding, a milestone
+         birthday, a graduation, and a bridal party. Still TODO: drop
+         a real short clip into the .gallery__film tile (see the
+         commented <video> template inside it) to replace the still.
+         ============================================================ -->
+    <section class="gallery" id="gallery" aria-labelledby="gallery-title">
+      <div class="gallery__inner">
+        <div class="gallery__head">
+          <p class="eyebrow">A night at the booth</p>
+          <h2 id="gallery-title">See it in action</h2>
+          <p class="gallery__intro">Real smiles, real prints, real evenings. Here's a
+            little of what the booth looks like once the room fills up.</p>
+        </div>
+
+        <div class="gallery__grid">
+
+          <!-- FILM TILE: currently a still poster with a play badge.
+               To make it a live loop, uncomment the <video> below and
+               delete the <img>. Keep it muted + short so it autoplays
+               on mobile and doesn't slow the page. -->
+          <figure class="polaroid gallery__item gallery__film gallery__item--tall">
+            <div class="polaroid__img">
+              <img src="images/gallery-wedding-strip-fresh-print-01.jpg" alt="Bride holding up a freshly printed photo booth strip from her wedding reception"
+                   loading="lazy" decoding="async" width="720" height="1080">
+              <!--
+              <video class="gallery__video" poster="images/gallery-wedding-strip-fresh-print-01.jpg"
+                     autoplay muted loop playsinline preload="none" width="720" height="1080">
+                <source src="video/booth-loop.mp4" type="video/mp4">
+              </video>
+              -->
+              <span class="gallery__play" aria-hidden="true"></span>
+            </div>
+            <figcaption>Fresh off the press</figcaption>
+          </figure>
+
+          <figure class="polaroid gallery__item">
+            <div class="polaroid__img">
+              <img src="images/gallery-wedding-strip-reveal-01.jpg" alt="Bride and groom laughing while looking at their photo strip together"
+                   loading="lazy" decoding="async" width="720" height="1080">
+            </div>
+            <figcaption>Seeing it for the first time</figcaption>
+          </figure>
+
+          <figure class="polaroid gallery__item">
+            <div class="polaroid__img">
+              <img src="images/gallery-birthday-sparkler-group-01.jpeg" alt="Four friends posing with a sparkler at a milestone birthday party"
+                   loading="lazy" decoding="async" width="810" height="1080">
+            </div>
+            <figcaption>The whole crew, lit up</figcaption>
+          </figure>
+
+          <figure class="polaroid gallery__item">
+            <div class="polaroid__img">
+              <img src="images/gallery-grad-cap-toss-01.jpg" alt="Two graduates throwing their caps in the air in front of the booth backdrop"
+                   loading="lazy" decoding="async" width="720" height="1080">
+            </div>
+            <figcaption>Diplomas down, caps up</figcaption>
+          </figure>
+
+          <figure class="polaroid gallery__item">
+            <div class="polaroid__img">
+              <img src="images/gallery-garden-piggyback-jump-01.jpg" alt="Couple laughing mid-jump for a piggyback photo at a garden party"
+                   loading="lazy" decoding="async" width="720" height="1080">
+            </div>
+            <figcaption>One more before we go</figcaption>
+          </figure>
+
+          <figure class="polaroid gallery__item gallery__item--wide">
+            <div class="polaroid__img">
+              <img src="images/gallery-bridal-party-strip-review-01.jpg" alt="A bridal party in white dresses huddled together reviewing their photo strip"
+                   loading="lazy" decoding="async" width="1620" height="1080">
+            </div>
+            <figcaption>Huddled around the print</figcaption>
+          </figure>
+
+          <figure class="polaroid gallery__item">
+            <div class="polaroid__img">
+              <img src="images/gallery-strip-reveal-reaction-01.jpg" alt="Couple reacting with surprise and laughter as they see their photo strip for the first time"
+                   loading="lazy" decoding="async" width="720" height="1080">
+            </div>
+            <figcaption>That's the reaction we're after</figcaption>
+          </figure>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         7. CONTACT / CTA - form (Formspree) + info sidebar
+         ============================================================ -->
+    <section class="contact" id="contact" aria-labelledby="contact-title">
+      <div class="contact__inner">
+        <div class="contact__intro">
+          <p class="eyebrow">Get in touch</p>
+          <h2 id="contact-title">Let's talk about your event</h2>
+          <p>Tell us a little about the day you've got coming up. We'll get back to you
+            with honest advice and a straightforward quote, no hard sell.</p>
+        </div>
+
+        <div class="contact__body">
+          <!-- BOOKING FORM. Posts to Formspree. Submit is handled by script.js.
+               TODO BEFORE LAUNCH: replace YOUR_FORM_ID below (and the matching
+               FORMSPREE_ENDPOINT in script.js) with Jim's real Formspree form ID,
+               e.g. https://formspree.io/f/abcdwxyz . Until then the form runs in
+               DEMO MODE (shows success without sending) so it never looks broken. -->
+          <form class="form" id="quoteForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" novalidate>
+            <div class="form__row">
+              <label class="form__field">
+                <span>Name</span>
+                <input type="text" name="name" autocomplete="name" required>
+              </label>
+              <label class="form__field">
+                <span>Email</span>
+                <input type="email" name="email" autocomplete="email" required>
+              </label>
+            </div>
+            <div class="form__row">
+              <label class="form__field">
+                <span>Phone</span>
+                <input type="tel" name="phone" autocomplete="tel">
+              </label>
+              <label class="form__field">
+                <span>Event date</span>
+                <input type="date" name="event_date">
+              </label>
+            </div>
+            <label class="form__field">
+              <span>Event type</span>
+              <select name="event_type">
+                <option value="" selected>Choose one…</option>
+                <option>Wedding Reception</option>
+                <option>Corporate Event</option>
+                <option>Award Ceremony</option>
+                <option>Graduation Party</option>
+                <option>Class Reunion</option>
+                <option>Community Event</option>
+                <option>Anniversary</option>
+                <option>Church Gathering</option>
+                <option>Something else</option>
+              </select>
+            </label>
+            <label class="form__field">
+              <span>Tell us about it</span>
+              <textarea name="message" rows="4" placeholder="Where it is, roughly how many guests, anything you're hoping for…"></textarea>
+            </label>
+
+            <button type="submit" class="btn btn--solid form__submit">Send it over</button>
+            <p class="form__status" id="formStatus" role="status" aria-live="polite"></p>
+          </form>
+
+          <!-- CONTACT INFO SIDEBAR - placeholders for Jim's real details -->
+          <aside class="contact__card" aria-label="Contact details">
+            <svg class="contact__mark" viewBox="0 0 200 200" aria-hidden="true"><use href="#stamp"/></svg>
+            <ul class="contact__list">
+              <li>
+                <span class="contact__label">Call</span>
+                <a href="tel:+16362324501">(636) 232-4501</a>
+              </li>
+              <li>
+                <span class="contact__label">Email</span>
+                <!-- [PLACEHOLDER_EMAIL] -->
+                <a href="mailto:hello@timefadesphoto.com">hello@timefadesphoto.com</a>
+              </li>
+            </ul>
+            <div class="contact__social">
+              <span class="contact__label">Find us</span>
+              <div class="social">
+                <!-- [PLACEHOLDER_FACEBOOK] -->
+                <a href="#" aria-label="Facebook">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 8h3V4h-3c-2.2 0-4 1.8-4 4v2H7v4h3v6h4v-6h3l1-4h-4V8c0-.6.4-1 1-1z"/></svg>
+                </a>
+                <!-- [PLACEHOLDER_INSTAGRAM] -->
+                <a href="#" aria-label="Instagram">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2"/></svg>
+                </a>
+                <!-- [PLACEHOLDER_GOOGLE] -->
+                <a href="#" aria-label="Google Business">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.2c0 5-3.4 8.3-8.5 8.3A8.5 8.5 0 1 1 18.4 5.9L15.9 8.3A5 5 0 1 0 17.5 13H12.5v-3H21z"/></svg>
+                </a>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       8. FOOTER
+       ============================================================ -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__brand">
+        <svg class="footer__mark" viewBox="0 0 200 200" aria-hidden="true"><use href="#stamp"/></svg>
+        <p class="footer__tag">Remember When… Before Time Fades Away</p>
+        <p class="footer__area">Proudly serving St. Louis County, St. Charles County &amp; Jefferson County, Missouri.</p>
+      </div>
+
+      <nav class="footer__links" aria-label="Footer">
+        <a href="/#why">Why Us</a>
+        <a href="/#services">Services</a>
+        <a href="/features.html">Features</a>
+        <a href="/#gallery">Gallery</a>
+        <a href="/#about">About</a>
+        <a href="/#contact">Contact</a>
+      </nav>
+
+      <div class="footer__social social">
+        <!-- [PLACEHOLDER_FACEBOOK] -->
+        <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 8h3V4h-3c-2.2 0-4 1.8-4 4v2H7v4h3v6h4v-6h3l1-4h-4V8c0-.6.4-1 1-1z"/></svg></a>
+        <!-- [PLACEHOLDER_INSTAGRAM] -->
+        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2"/></svg></a>
+        <!-- [PLACEHOLDER_GOOGLE] -->
+        <a href="#" aria-label="Google Business"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.2c0 5-3.4 8.3-8.5 8.3A8.5 8.5 0 1 1 18.4 5.9L15.9 8.3A5 5 0 1 0 17.5 13H12.5v-3H21z"/></svg></a>
+      </div>
+    </div>
+    <p class="footer__legal">© <span id="year">2026</span> Time Fades Photobooth. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
