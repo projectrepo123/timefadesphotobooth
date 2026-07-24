@@ -103,12 +103,19 @@
       <!-- thin inner rings -->
       <circle cx="100" cy="100" r="86" fill="none" stroke="currentColor" stroke-width="1"/>
       <circle cx="100" cy="100" r="55" fill="none" stroke="currentColor" stroke-width="1"/>
+      <!-- watch hands behind the wordmark - matches the photographed logo,
+           which reads as a clock face inside this ring -->
+      <g stroke="currentColor" stroke-width="3" stroke-linecap="round" opacity="0.45">
+        <line x1="100" y1="100" x2="140" y2="77"/>
+        <line x1="100" y1="100" x2="73" y2="77"/>
+      </g>
+      <circle cx="100" cy="100" r="2.6" fill="currentColor" opacity="0.45"/>
       <!-- invisible arcs used as baselines for the curved text -->
       <path id="stampTopArc" fill="none" d="M 22,100 A 78,78 0 0 1 178,100"/>
       <path id="stampBottomArc" fill="none" d="M 178,100 A 78,78 0 0 1 22,100"/>
       <g fill="currentColor">
         <text class="stamp-arc" font-size="15">
-          <textPath href="#stampTopArc" startOffset="50%" text-anchor="middle">REMEMBER  WHEN</textPath>
+          <textPath href="#stampTopArc" startOffset="50%" text-anchor="middle">REMEMBER WHEN</textPath>
         </text>
         <text class="stamp-arc" font-size="12">
           <textPath href="#stampBottomArc" startOffset="50%" text-anchor="middle">BEFORE TIME FADES AWAY</textPath>

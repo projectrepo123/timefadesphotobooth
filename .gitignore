@@ -1,6 +1,10 @@
 .DS_Store
 Thumbs.db
 
+# npm deps (fontsource packages for logo tooling) - keep the manifest,
+# not the installed tree
+/node_modules/
+
 # Stale offline-demo mirror still bundles unlicensed competitor stock
 # photos that were removed from images/ - keep out of git history.
 /offline-demo/
