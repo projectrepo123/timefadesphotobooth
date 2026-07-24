@@ -59,6 +59,10 @@ a { color: inherit; }
 .hero, .why, .services, .features, .about, .gallery, .contact {
   position: relative;
 }
+/* keep the sticky nav from covering a heading when jumping to an anchor */
+.why, .services, .gallery, .about, .contact {
+  scroll-margin-top: 90px;
+}
 .hero::before, .why::before, .services::before,
 .features::before, .about::before, .gallery::before, .contact::before {
   content: "";
@@ -527,7 +531,8 @@ a { color: inherit; }
 
 @media (max-width: 560px) {
   /* drop the side arrows below the photo on small screens so they
-     don't crowd the image; keyboard/swipe still work */
+     don't crowd the image; the on-screen buttons and keyboard arrows
+     still work (no touch-swipe gesture is implemented) */
   .lightbox__nav { top: auto; bottom: clamp(.8rem, 4vw, 1.4rem); transform: none; }
   .lightbox__nav:hover { transform: scale(1.08); }
   .lightbox__prev { left: 25%; }
@@ -583,7 +588,7 @@ a { color: inherit; }
 .form textarea { resize: vertical; }
 .form__submit { justify-self: start; margin-top: .3rem; }
 .form__status { margin: 0; font-weight: 600; min-height: 1.3em; }
-.form__status.is-ok  { color: #4a7c4a; }
+.form__status.is-ok  { color: #45744a; }
 .form__status.is-err { color: #a5533a; }
 
 .contact__card {
@@ -609,7 +614,7 @@ a { color: inherit; }
 }
 .social { display: flex; gap: .7rem; justify-content: center; }
 .social a {
-  width: 42px; height: 42px;
+  width: 44px; height: 44px;
   display: grid; place-items: center;
   border: 1.5px solid rgba(247,243,234,.5);
   border-radius: 50%;
@@ -780,6 +785,11 @@ a { color: inherit; }
 @media (max-width: 680px) {
   .caps__grid { grid-template-columns: 1fr; gap: 1.8rem; }
 }
+
+/* ============================================================
+   404 PAGE
+   ============================================================ */
+.notfound__cta { margin-top: 1.4rem; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
