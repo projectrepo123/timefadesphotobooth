@@ -33,17 +33,10 @@
   }
 
   /* ---- Contact / booking form (Formspree) ----
-     The form POSTs to Formspree. Until Jim's real endpoint is pasted in
-     below, it runs in DEMO MODE: it shows the success state WITHOUT actually
-     sending, so a live demo never looks broken if someone tries it.
-
-     TODO BEFORE LAUNCH: replace YOUR_FORM_ID with Jim's real Formspree form
-     ID (from his Formspree dashboard), e.g. https://formspree.io/f/abcdwxyz
-     Update the matching action="" on the <form> in index.html to the same URL.
-     Setting a real endpoint automatically turns DEMO_MODE off.
+     Submits via fetch so the visitor stays on the page. Must stay in sync with
+     the action="" on the <form> in index.html, which is the no-JS fallback.
   */
-  var FORMSPREE_ENDPOINT = "https://formspree.io/f/YOUR_FORM_ID";
-  var DEMO_MODE = FORMSPREE_ENDPOINT.indexOf("YOUR_FORM_ID") !== -1;
+  var FORMSPREE_ENDPOINT = "https://formspree.io/f/xnjeoqgo";
 
   var form = document.getElementById("quoteForm");
   var status = document.getElementById("formStatus");
@@ -64,18 +57,6 @@
       if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = "Sending…"; }
       setStatus("Sending…", "");
 
-      // DEMO MODE: no live endpoint yet, so simulate a successful send after a
-      // short beat. This branch disappears on its own once a real
-      // FORMSPREE_ENDPOINT is set above; the real fetch path below then runs.
-      if (DEMO_MODE) {
-        setTimeout(function () {
-          form.reset();
-          setStatus("Thank you. We've got your note and will be in touch soon.", "ok");
-          if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = originalLabel; }
-        }, 650);
-        return;
-      }
-
       fetch(FORMSPREE_ENDPOINT, {
         method: "POST",
         body: new FormData(form),
@@ -91,7 +72,8 @@
           }
         })
         .catch(function () {
-          // Network failure - expected while the placeholder endpoint is in place
+          // Network failure (offline, blocked request) - never leave the visitor
+          // guessing; point them at the phone/email in the sidebar instead.
           setStatus("We couldn't send that just now. Please try again, or reach us by phone or email.", "err");
         })
         .finally(function () {

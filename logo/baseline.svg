@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <rect width="200" height="200" fill="#f8f4ec"/>
+  <g>
+    <circle cx="100" cy="100" r="95" fill="none" stroke="#2b2019" stroke-width="2" stroke-dasharray="6 5"/>
+    <circle cx="100" cy="100" r="86" fill="none" stroke="#2b2019" stroke-width="1"/>
+    <circle cx="100" cy="100" r="55" fill="none" stroke="#2b2019" stroke-width="1"/>
+    <g stroke="#2b2019" stroke-width="3" stroke-linecap="round" opacity="0.45">
+      <line x1="100" y1="100" x2="140" y2="77"/>
+      <line x1="100" y1="100" x2="73" y2="77"/>
+    </g>
+    <circle cx="100" cy="100" r="2.6" fill="#2b2019" opacity="0.45"/>
+    <path id="stampTopArc" fill="none" d="M 22,100 A 78,78 0 0 1 178,100"/>
+    <path id="stampBottomArc" fill="none" d="M 178,100 A 78,78 0 0 1 22,100"/>
+    <g fill="#2b2019">
+      <text font-family="Georgia, serif" font-weight="600" font-size="15" letter-spacing="2.7">
+        <textPath href="#stampTopArc" startOffset="50%" text-anchor="middle">REMEMBER WHEN</textPath>
+      </text>
+      <text font-family="Georgia, serif" font-weight="600" font-size="12" letter-spacing="0.5">
+        <textPath href="#stampBottomArc" startOffset="50%" text-anchor="middle">BEFORE TIME FADES AWAY</textPath>
+      </text>
+      <text x="34" y="105" font-size="14" text-anchor="middle">&#10022;</text>
+      <text x="166" y="105" font-size="14" text-anchor="middle">&#10022;</text>
+      <text x="100" y="94" font-family="'Courier New', monospace" font-size="24" text-anchor="middle">TIME FADES</text>
+      <text x="100" y="120" font-family="'Courier New', monospace" font-size="17" text-anchor="middle" letter-spacing="1.5">PHOTOBOOTH</text>
+    </g>
+  </g>
+</svg>

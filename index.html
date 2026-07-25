@@ -55,6 +55,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Source+Sans+3:wght@400;500;600;700&family=Special+Elite&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -69,7 +70,7 @@
     "description": "Warm, fully attended photo booth rental for weddings and celebrations across the St. Louis, Missouri area.",
     "url": "https://timefadesphoto.com/",
     "image": "https://timefadesphoto.com/images/og-cover.jpg",
-    "logo": "https://timefadesphoto.com/time-fades-logo.jpg",
+    "logo": "https://timefadesphoto.com/logo-badge.png",
     "telephone": "+1-636-232-4501",
     "email": "hello@timefadesphoto.com",
     "priceRange": "$$",
@@ -91,51 +92,11 @@
 <body>
 
   <!-- ============================================================
-       INLINE SVG SPRITE - the stamp/postmark logo, defined once
-       and re-used at different sizes via <use href="#stamp">.
-       Placeholder built from Jim's hand-drawn concept; swap for a
-       real vector logo file later.
-       ============================================================ -->
-  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
-    <symbol id="stamp" viewBox="0 0 200 200">
-      <!-- dashed rubber-stamp border -->
-      <circle cx="100" cy="100" r="95" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="6 5"/>
-      <!-- thin inner rings -->
-      <circle cx="100" cy="100" r="86" fill="none" stroke="currentColor" stroke-width="1"/>
-      <circle cx="100" cy="100" r="55" fill="none" stroke="currentColor" stroke-width="1"/>
-      <!-- watch hands behind the wordmark - matches the photographed logo,
-           which reads as a clock face inside this ring -->
-      <g stroke="currentColor" stroke-width="3" stroke-linecap="round" opacity="0.45">
-        <line x1="100" y1="100" x2="140" y2="77"/>
-        <line x1="100" y1="100" x2="73" y2="77"/>
-      </g>
-      <circle cx="100" cy="100" r="2.6" fill="currentColor" opacity="0.45"/>
-      <!-- invisible arcs used as baselines for the curved text -->
-      <path id="stampTopArc" fill="none" d="M 22,100 A 78,78 0 0 1 178,100"/>
-      <path id="stampBottomArc" fill="none" d="M 178,100 A 78,78 0 0 1 22,100"/>
-      <g fill="currentColor">
-        <text class="stamp-arc" font-size="15">
-          <textPath href="#stampTopArc" startOffset="50%" text-anchor="middle">REMEMBER WHEN</textPath>
-        </text>
-        <text class="stamp-arc" font-size="12">
-          <textPath href="#stampBottomArc" startOffset="50%" text-anchor="middle">BEFORE TIME FADES AWAY</textPath>
-        </text>
-        <!-- flanking stars beside the center block -->
-        <text x="34" y="105" font-size="14" text-anchor="middle">✦</text>
-        <text x="166" y="105" font-size="14" text-anchor="middle">✦</text>
-        <!-- center wordmark -->
-        <text class="stamp-center" x="100" y="94" font-size="24" text-anchor="middle">TIME FADES</text>
-        <text class="stamp-center" x="100" y="120" font-size="17" text-anchor="middle" letter-spacing="1.5">PHOTOBOOTH</text>
-      </g>
-    </symbol>
-  </svg>
-
-  <!-- ============================================================
        1. NAV
        ============================================================ -->
   <header class="nav" id="top">
     <a class="nav__brand" href="/#top" aria-label="Time Fades Photobooth home">
-      <img class="nav__mark" src="time-fades-logo.jpg" alt="" width="200" height="224">
+      <img class="nav__mark" src="assets/tf-mark.svg" alt="" width="200" height="200">
       <span class="nav__word">Time&nbsp;Fades<span>Photobooth</span></span>
     </a>
 
@@ -174,7 +135,7 @@
           </div>
         </div>
         <div class="hero__mark" aria-hidden="true">
-          <img src="time-fades-logo.jpg" alt="" width="200" height="224">
+          <img src="time-fades-logo.jpg" alt="" width="960" height="1072">
         </div>
       </div>
     </section>
@@ -468,12 +429,11 @@
         </div>
 
         <div class="contact__body">
-          <!-- BOOKING FORM. Posts to Formspree. Submit is handled by script.js.
-               TODO BEFORE LAUNCH: replace YOUR_FORM_ID below (and the matching
-               FORMSPREE_ENDPOINT in script.js) with Jim's real Formspree form ID,
-               e.g. https://formspree.io/f/abcdwxyz . Until then the form runs in
-               DEMO MODE (shows success without sending) so it never looks broken. -->
-          <form class="form" id="quoteForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" novalidate>
+          <!-- BOOKING FORM. Posts to Formspree; submit is handled by script.js,
+               which intercepts and sends via fetch so the visitor stays on the page.
+               The action below is the no-JS fallback and must stay in sync with
+               FORMSPREE_ENDPOINT in script.js. -->
+          <form class="form" id="quoteForm" action="https://formspree.io/f/xnjeoqgo" method="POST" novalidate>
             <div class="form__row">
               <label class="form__field">
                 <span>Name</span>
@@ -520,7 +480,7 @@
 
           <!-- CONTACT INFO SIDEBAR - placeholders for Jim's real details -->
           <aside class="contact__card" aria-label="Contact details">
-            <svg class="contact__mark" viewBox="0 0 200 200" aria-hidden="true"><use href="#stamp"/></svg>
+            <img class="contact__mark" src="assets/tf-mark-brass.svg" alt="" width="200" height="200">
             <ul class="contact__list">
               <li>
                 <span class="contact__label">Call</span>
@@ -562,7 +522,7 @@
   <footer class="footer">
     <div class="footer__inner">
       <div class="footer__brand">
-        <svg class="footer__mark" viewBox="0 0 200 200" aria-hidden="true"><use href="#stamp"/></svg>
+        <img class="footer__mark" src="assets/tf-mark-brass.svg" alt="" width="200" height="200">
         <p class="footer__tag">Remember When… Before Time Fades Away</p>
         <p class="footer__area">Proudly serving St. Louis County, St. Charles County &amp; Jefferson County, Missouri.</p>
       </div>

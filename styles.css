@@ -113,10 +113,6 @@ a { color: inherit; }
 }
 .btn--outline:hover { background: var(--sepia-deep); color: var(--paper); border-color: var(--sepia-deep); transform: translateY(-2px); }
 
-/* stamp logo type - applied inside the inline SVG */
-.stamp-arc   { font-family: var(--serif); font-weight: 600; letter-spacing: .18em; }
-.stamp-center{ font-family: var(--type); letter-spacing: .04em; }
-
 /* ============================================================
    1. NAV
    ============================================================ */
@@ -131,7 +127,7 @@ a { color: inherit; }
   position: sticky; top: 0; z-index: 50;
 }
 .nav__brand { display: flex; align-items: center; gap: .7rem; text-decoration: none; color: var(--ink); }
-.nav__mark { width: 54px; height: 54px; object-fit: cover; border-radius: 50%; flex: none; mix-blend-mode: multiply; }
+.nav__mark { width: 54px; height: 54px; flex: none; }
 .nav__word {
   font-family: var(--serif);
   font-weight: 600;
@@ -198,6 +194,8 @@ a { color: inherit; }
 .hero__mark img {
   width: min(94%, 440px);
   height: auto;
+  /* The logo art carries its own cream ground, so it reads as a printed card
+     tipped onto the page rather than as artwork sitting flat on it. */
   border-radius: 14px;
   box-shadow: 0 14px 34px rgba(58, 42, 26, .20);
   transform: rotate(-4deg);
@@ -599,7 +597,7 @@ a { color: inherit; }
   text-align: center;
   box-shadow: var(--shadow-soft);
 }
-.contact__mark { width: 108px; height: 108px; color: var(--brass); margin: 0 auto .6rem; }
+.contact__mark { width: 108px; height: 108px; margin: 0 auto .6rem; }
 .contact__list { list-style: none; margin: 0 0 1.4rem; padding: 0; display: grid; gap: 1rem; }
 .contact__list a { color: var(--paper); font-size: 1.12rem; text-decoration: none; border-bottom: 1px solid rgba(247,243,234,.4); }
 .contact__list a:hover { color: var(--brass); }
@@ -637,7 +635,7 @@ a { color: inherit; }
   justify-content: space-between; gap: 1.8rem;
 }
 .footer__brand { display: flex; align-items: center; gap: 1rem; max-width: 340px; }
-.footer__mark { width: 60px; height: 60px; color: var(--brass); flex: none; }
+.footer__mark { width: 60px; height: 60px; flex: none; }
 .footer__tag { font-family: var(--serif); font-style: italic; margin: 0; color: rgba(247,243,234,.9); }
 .footer__links { display: flex; flex-wrap: wrap; gap: 1.2rem; }
 .footer__links a { color: rgba(247,243,234,.85); text-decoration: none; font-weight: 500; }
