@@ -14,8 +14,9 @@
      Instagram / Google Business - no profiles yet, so their icons are removed
                    rather than left linking nowhere. When they exist, restore
                    the icons AND add the URLs to the JSON-LD sameAs array.
-     Contact email - hello@timefadesphoto.com is on the OTHER domain. Confirm
-                   that mailbox receives, or move it to the live domain.
+     (Contact email is jim@timefadesphotobooth.com, forwarded to Gmail by a
+      Cloudflare Email Routing rule. It must stay on the live domain - that is
+      where the MX records point.)
      About-section polaroid - swap SVG placeholder for a real photo
    ========================================== */
 -->
@@ -73,7 +74,7 @@
     "image": "https://timefadesphotobooth.com/images/og-cover.jpg",
     "logo": "https://timefadesphotobooth.com/logo-badge.png",
     "telephone": "+1-636-232-4501",
-    "email": "hello@timefadesphoto.com",
+    "email": "jim@timefadesphotobooth.com",
     "priceRange": "$$",
     "slogan": "Remember When… Before Time Fades Away",
     "sameAs": [
@@ -493,7 +494,7 @@
               <li>
                 <span class="contact__label">Email</span>
                 <!-- [PLACEHOLDER_EMAIL] -->
-                <a href="mailto:hello@timefadesphoto.com">hello@timefadesphoto.com</a>
+                <a href="mailto:jim@timefadesphotobooth.com">jim@timefadesphotobooth.com</a>
               </li>
             </ul>
             <div class="contact__social">
