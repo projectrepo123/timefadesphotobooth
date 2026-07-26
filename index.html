@@ -11,9 +11,9 @@
            301-redirect here; do not let both serve 200)
    ==========================================
    STILL OUTSTANDING:
-     Social URLs - Facebook / Instagram / Google Business are still href="#"
-                   in the contact sidebar and footer. Add them as sameAs
-                   entries in the JSON-LD at the same time.
+     Instagram / Google Business - no profiles yet, so their icons are removed
+                   rather than left linking nowhere. When they exist, restore
+                   the icons AND add the URLs to the JSON-LD sameAs array.
      Contact email - hello@timefadesphoto.com is on the OTHER domain. Confirm
                    that mailbox receives, or move it to the live domain.
      About-section polaroid - swap SVG placeholder for a real photo
@@ -76,6 +76,9 @@
     "email": "hello@timefadesphoto.com",
     "priceRange": "$$",
     "slogan": "Remember When… Before Time Fades Away",
+    "sameAs": [
+      "https://www.facebook.com/profile.php?id=61592646774839"
+    ],
     "address": {
       "@type": "PostalAddress",
       "addressRegion": "MO",
@@ -496,18 +499,12 @@
             <div class="contact__social">
               <span class="contact__label">Find us</span>
               <div class="social">
-                <!-- [PLACEHOLDER_FACEBOOK] -->
-                <a href="#" aria-label="Facebook">
+                <a href="https://www.facebook.com/profile.php?id=61592646774839" aria-label="Facebook" target="_blank" rel="noopener">
                   <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 8h3V4h-3c-2.2 0-4 1.8-4 4v2H7v4h3v6h4v-6h3l1-4h-4V8c0-.6.4-1 1-1z"/></svg>
                 </a>
-                <!-- [PLACEHOLDER_INSTAGRAM] -->
-                <a href="#" aria-label="Instagram">
-                  <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2"/></svg>
-                </a>
-                <!-- [PLACEHOLDER_GOOGLE] -->
-                <a href="#" aria-label="Google Business">
-                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.2c0 5-3.4 8.3-8.5 8.3A8.5 8.5 0 1 1 18.4 5.9L15.9 8.3A5 5 0 1 0 17.5 13H12.5v-3H21z"/></svg>
-                </a>
+                <!-- Instagram and Google Business icons stay out until those
+                     profiles exist: an icon that links nowhere reads as broken,
+                     and both belong in the JSON-LD sameAs array when added. -->
               </div>
             </div>
           </aside>
@@ -538,12 +535,8 @@
       </nav>
 
       <div class="footer__social social">
-        <!-- [PLACEHOLDER_FACEBOOK] -->
-        <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 8h3V4h-3c-2.2 0-4 1.8-4 4v2H7v4h3v6h4v-6h3l1-4h-4V8c0-.6.4-1 1-1z"/></svg></a>
-        <!-- [PLACEHOLDER_INSTAGRAM] -->
-        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2"/></svg></a>
-        <!-- [PLACEHOLDER_GOOGLE] -->
-        <a href="#" aria-label="Google Business"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.2c0 5-3.4 8.3-8.5 8.3A8.5 8.5 0 1 1 18.4 5.9L15.9 8.3A5 5 0 1 0 17.5 13H12.5v-3H21z"/></svg></a>
+        <a href="https://www.facebook.com/profile.php?id=61592646774839" aria-label="Facebook" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 8h3V4h-3c-2.2 0-4 1.8-4 4v2H7v4h3v6h4v-6h3l1-4h-4V8c0-.6.4-1 1-1z"/></svg></a>
+        <!-- Instagram / Google Business icons return here once those profiles exist. -->
       </div>
     </div>
     <p class="footer__legal">© <span id="year">2026</span> Time Fades Photobooth. All rights reserved.</p>
