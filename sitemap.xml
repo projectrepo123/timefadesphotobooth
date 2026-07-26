@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Update the domain below if the live site is not timefadesphoto.com -->
+<!-- Canonical domain: timefadesphotobooth.com. Keep lastmod current when
+     page content changes materially. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://timefadesphoto.com/</loc>
-    <lastmod>2026-07-16</lastmod>
+    <loc>https://timefadesphotobooth.com/</loc>
+    <lastmod>2026-07-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://timefadesphoto.com/features.html</loc>
-    <lastmod>2026-07-16</lastmod>
+    <loc>https://timefadesphotobooth.com/features.html</loc>
+    <lastmod>2026-07-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

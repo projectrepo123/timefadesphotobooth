@@ -7,15 +7,15 @@
    Business Name: Time Fades Photobooth
    Owner: Jim
    Tagline: Remember When... Before Time Fades Away
-   Domain (placeholder): timefadesphoto.com
+   Domain: timefadesphotobooth.com  (canonical - timefadesphoto.com should
+           301-redirect here; do not let both serve 200)
    ==========================================
-   PLACEHOLDERS TO FILL BEFORE LAUNCH:
-     [PLACEHOLDER_EMAIL]     - contact email
-     [PLACEHOLDER_PHONE]     - contact phone (display + tel: link)
-     [PLACEHOLDER_FACEBOOK]  - Facebook page URL
-     [PLACEHOLDER_INSTAGRAM] - Instagram page URL
-     [PLACEHOLDER_GOOGLE]    - Google Business page URL
-     [FORMSPREE_ENDPOINT_PLACEHOLDER] - real Formspree form endpoint (see script.js)
+   STILL OUTSTANDING:
+     Social URLs - Facebook / Instagram / Google Business are still href="#"
+                   in the contact sidebar and footer. Add them as sameAs
+                   entries in the JSON-LD at the same time.
+     Contact email - hello@timefadesphoto.com is on the OTHER domain. Confirm
+                   that mailbox receives, or move it to the live domain.
      About-section polaroid - swap SVG placeholder for a real photo
    ========================================== */
 -->
@@ -25,11 +25,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- SEO PLACEHOLDERS to confirm before launch: canonical domain,
-       phone/email in JSON-LD + contact, social URLs (sameAs). -->
+  <!-- Canonical domain confirmed as timefadesphotobooth.com. Still to add:
+       social URLs (sameAs) once the profiles exist. -->
   <title>Photo Booth Rental in St. Louis, MO | Time Fades Photobooth</title>
   <meta name="description" content="Warm, fully attended photo booth rental for weddings & celebrations across St. Louis, St. Charles and Jefferson County, MO. Instant prints, boomerangs and keepsakes.">
-  <link rel="canonical" href="https://timefadesphoto.com/">
+  <link rel="canonical" href="https://timefadesphotobooth.com/">
   <meta name="robots" content="index, follow">
 
   <!-- Local signals -->
@@ -41,12 +41,12 @@
   <meta property="og:site_name" content="Time Fades Photobooth">
   <meta property="og:title" content="Time Fades Photobooth | Remember When… Before Time Fades Away">
   <meta property="og:description" content="Warm, fully attended photo booth rental for weddings & celebrations across the St. Louis area. Instant prints and keepsakes worth holding onto.">
-  <meta property="og:url" content="https://timefadesphoto.com/">
-  <meta property="og:image" content="https://timefadesphoto.com/images/og-cover.jpg">
+  <meta property="og:url" content="https://timefadesphotobooth.com/">
+  <meta property="og:image" content="https://timefadesphotobooth.com/images/og-cover.jpg">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Time Fades Photobooth | Remember When… Before Time Fades Away">
   <meta name="twitter:description" content="Warm, fully attended photo booth rental for weddings & celebrations across the St. Louis area.">
-  <meta name="twitter:image" content="https://timefadesphoto.com/images/og-cover.jpg">
+  <meta name="twitter:image" content="https://timefadesphotobooth.com/images/og-cover.jpg">
 
   <!-- Fonts: Google Fonts CDN for the first draft.
        Can be self-hosted later for performance / privacy. -->
@@ -60,17 +60,18 @@
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 
-  <!-- LocalBusiness structured data - powers local/Maps SEO. Fill the
-       real phone, email and social URLs before launch. -->
+  <!-- LocalBusiness structured data - powers local/Maps SEO. Add a "sameAs"
+       array of the social/Google Business URLs once they exist: that is what
+       ties this site to the Google Business Profile. -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "name": "Time Fades Photobooth",
     "description": "Warm, fully attended photo booth rental for weddings and celebrations across the St. Louis, Missouri area.",
-    "url": "https://timefadesphoto.com/",
-    "image": "https://timefadesphoto.com/images/og-cover.jpg",
-    "logo": "https://timefadesphoto.com/logo-badge.png",
+    "url": "https://timefadesphotobooth.com/",
+    "image": "https://timefadesphotobooth.com/images/og-cover.jpg",
+    "logo": "https://timefadesphotobooth.com/logo-badge.png",
     "telephone": "+1-636-232-4501",
     "email": "hello@timefadesphoto.com",
     "priceRange": "$$",
