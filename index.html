@@ -480,6 +480,13 @@
               <textarea name="message" rows="4" placeholder="Where it is, roughly how many guests, anything you're hoping for…"></textarea>
             </label>
 
+            <!-- Honeypot: hidden from real visitors via CSS, left blank by humans, filled in
+                 by most spam bots so Formspree can silently drop the submission. -->
+            <label class="form__field form__field--hp" aria-hidden="true">
+              <span>Leave this field blank</span>
+              <input type="text" name="_gotcha" tabindex="-1" autocomplete="off">
+            </label>
+
             <button type="submit" class="btn btn--solid form__submit">Send it over</button>
             <p class="form__status" id="formStatus" role="status" aria-live="polite"></p>
           </form>
