@@ -11,13 +11,15 @@
            301-redirect here; do not let both serve 200)
    ==========================================
    STILL OUTSTANDING:
-     Instagram / Google Business - no profiles yet, so their icons are removed
-                   rather than left linking nowhere. When they exist, restore
-                   the icons AND add the URLs to the JSON-LD sameAs array.
+     Instagram - no profile yet, so its icon is removed rather than left
+                   linking nowhere. When it exists, restore the icon AND add
+                   the URL to the JSON-LD sameAs array. (Facebook and the
+                   Google Business Profile are both live and already linked.)
      (Contact email is jim@timefadesphotobooth.com, forwarded to Gmail by a
       Cloudflare Email Routing rule. It must stay on the live domain - that is
       where the MX records point.)
-     About-section polaroid - swap SVG placeholder for a real photo
+     About-section imagery is illustrative, NOT photographs of the owner or
+                   his family - see the note above the .about__media block.
    ========================================== */
 -->
 <!DOCTYPE html>
@@ -26,8 +28,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Canonical domain confirmed as timefadesphotobooth.com. Still to add:
-       social URLs (sameAs) once the profiles exist. -->
+  <!-- Canonical domain confirmed as timefadesphotobooth.com. Facebook and the
+       Google Business Profile are in the sameAs array below; add Instagram
+       once that profile exists. -->
   <title>Photo Booth Rental in St. Louis, MO | Time Fades Photobooth</title>
   <meta name="description" content="Warm, fully attended photo booth rental for weddings & celebrations across St. Louis, St. Charles and Jefferson County, MO. Instant prints, boomerangs and keepsakes.">
   <link rel="canonical" href="https://timefadesphotobooth.com/">
@@ -61,9 +64,9 @@
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 
-  <!-- LocalBusiness structured data - powers local/Maps SEO. Add a "sameAs"
-       array of the social/Google Business URLs once they exist: that is what
-       ties this site to the Google Business Profile. -->
+  <!-- LocalBusiness structured data - powers local/Maps SEO. The "sameAs"
+       array is what ties this site to the Google Business Profile; keep any
+       new social URLs (Instagram) in sync with the footer icons. -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -279,35 +282,46 @@
     </section>
 
     <!-- ============================================================
-         6. ABOUT / OUR STORY - emotional heart. Asymmetric:
-         polaroid-framed placeholder offset against left-aligned
+         6. ABOUT / OUR STORY - emotional heart. A scatter of
+         polaroid-framed period imagery offset against left-aligned
          first-person copy.
          ============================================================ -->
     <section class="about" id="about" aria-labelledby="about-title">
       <div class="about__inner">
-        <div class="about__media" aria-hidden="true">
-          <!-- POLAROID PLACEHOLDER - swap this SVG for a real photo of
-               Jim & his wife (or an event) before launch. -->
-          <figure class="polaroid polaroid--a">
+        <!-- ILLUSTRATIVE IMAGERY - these are period-styled stock images, NOT
+             photographs of Jim, his wife, or their relatives. Captions and alt
+             text are deliberately written so the page never claims otherwise.
+             The files are AI-generated (Grok Imagine) and each still carries its
+             embedded C2PA provenance manifest; leave that manifest intact - do
+             not re-encode or "optimise" these files, which would strip it. -->
+        <div class="about__media">
+          <figure class="polaroid">
             <div class="polaroid__img">
-              <svg viewBox="0 0 200 200" role="img" aria-label="Photo placeholder">
-                <rect width="200" height="200" fill="#e9e0cf"/>
-                <path d="M0 150l55-45 40 30 45-55 60 55v65H0z" fill="#cdbfa3"/>
-                <circle cx="150" cy="55" r="20" fill="#dccfae"/>
-              </svg>
+              <img src="images/about-portrait-couple-bw-01.jpg" alt="A black-and-white studio portrait of an older couple, the woman wearing pearls and the man in a dark suit"
+                   loading="lazy" decoding="async" width="864" height="1152">
             </div>
-            <figcaption>Us, a while back</figcaption>
+            <figcaption>Handed down</figcaption>
           </figure>
-          <figure class="polaroid polaroid--b">
+          <figure class="polaroid">
             <div class="polaroid__img">
-              <svg viewBox="0 0 200 200" role="img" aria-label="Photo placeholder">
-                <rect width="200" height="200" fill="#ded2b8"/>
-                <circle cx="70" cy="80" r="26" fill="#c9b892"/>
-                <circle cx="120" cy="86" r="30" fill="#bda87f"/>
-                <path d="M0 160h200v40H0z" fill="#c4b48c"/>
-              </svg>
+              <img src="images/about-portrait-couple-70s-01.jpg" alt="A couple photographed in the 1970s in front of a weathered wood wall"
+                   loading="lazy" decoding="async" width="864" height="1152">
             </div>
-            <figcaption>The reason we started</figcaption>
+            <figcaption>Still on the fridge</figcaption>
+          </figure>
+          <figure class="polaroid">
+            <div class="polaroid__img">
+              <img src="images/about-boys-doorstep-01.jpg" alt="Two boys in flat caps, bow ties and suspenders standing on a front doorstep"
+                   loading="lazy" decoding="async" width="864" height="1152">
+            </div>
+            <figcaption>Sunday best</figcaption>
+          </figure>
+          <figure class="polaroid">
+            <div class="polaroid__img">
+              <img src="images/about-boys-brickwall-01.jpg" alt="Two boys in flat caps and suspenders facing each other beside a brick wall"
+                   loading="lazy" decoding="async" width="864" height="1152">
+            </div>
+            <figcaption>The kind you keep</figcaption>
           </figure>
         </div>
 
@@ -336,9 +350,9 @@
          look rather than fighting it.
 
          Real photos from Jim's own events: a wedding, a milestone
-         birthday, a graduation, and a bridal party. Still TODO: drop
-         a real short clip into the .gallery__film tile (see the
-         commented <video> template inside it) to replace the still.
+         birthday, a graduation, and a bridal party. Every tile is a
+         still. Optional future work: add a short booth clip to the
+         first tile (see the commented <video> template inside it).
          ============================================================ -->
     <section class="gallery" id="gallery" aria-labelledby="gallery-title">
       <div class="gallery__inner">
@@ -351,11 +365,14 @@
 
         <div class="gallery__grid">
 
-          <!-- FILM TILE: currently a still poster with a play badge.
-               To make it a live loop, uncomment the <video> below and
-               delete the <img>. Keep it muted + short so it autoplays
-               on mobile and doesn't slow the page. -->
-          <figure class="polaroid gallery__item gallery__film gallery__item--tall">
+          <!-- FILM TILE (inactive): this is a still photo, so it must NOT show a
+               play badge - there is no clip behind it and no video/ directory in
+               the repo. To turn it into a real loop later: drop the file at
+               video/booth-loop.mp4, uncomment the <video>, delete the <img>, and
+               restore BOTH the gallery__film class on the figure below and the
+               <span class="gallery__play"> inside it. Keep the clip muted + short
+               so it autoplays on mobile and doesn't slow the page. -->
+          <figure class="polaroid gallery__item gallery__item--tall">
             <div class="polaroid__img">
               <img src="images/gallery-wedding-strip-fresh-print-01.jpg" alt="Bride holding up a freshly printed photo booth strip from her wedding reception"
                    loading="lazy" decoding="async" width="720" height="1080">
@@ -365,7 +382,6 @@
                 <source src="video/booth-loop.mp4" type="video/mp4">
               </video>
               -->
-              <span class="gallery__play" aria-hidden="true"></span>
             </div>
             <figcaption>Fresh off the press</figcaption>
           </figure>
@@ -491,7 +507,7 @@
             <p class="form__status" id="formStatus" role="status" aria-live="polite"></p>
           </form>
 
-          <!-- CONTACT INFO SIDEBAR - placeholders for Jim's real details -->
+          <!-- CONTACT INFO SIDEBAR - these are Jim's real, live details. -->
           <aside class="contact__card" aria-label="Contact details">
             <img class="contact__mark" src="assets/tf-mark-brass.svg" alt="" width="200" height="200">
             <ul class="contact__list">
@@ -501,7 +517,6 @@
               </li>
               <li>
                 <span class="contact__label">Email</span>
-                <!-- [PLACEHOLDER_EMAIL] -->
                 <a href="mailto:jim@timefadesphotobooth.com">jim@timefadesphotobooth.com</a>
               </li>
             </ul>
