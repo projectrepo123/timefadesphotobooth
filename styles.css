@@ -22,6 +22,20 @@
   --brass-hover:  #d4ab5f;  /* gold button hover on dark bands */
   --photo-fill:   #e9e0cf;  /* polaroid / photo placeholder fill */
 
+  /* ---- Polaroid print stock ----
+     Integral film stock is a warm ivory that ages unevenly toward the chin -
+     never a flat white. The floor is the darkest value the emulsion could
+     actually hold; nothing in a real print goes below roughly this. */
+  --polaroid-frame:      #fcf8f0;
+  --polaroid-frame-aged: #f2ebdd;
+  --emulsion-floor:      #3d3128;
+  /* One shared grade so every print on the site reads as the same pack of
+     film: warm it, drain some colour, flatten the contrast. --emulsion adds
+     the softness on top - see the note on .polaroid__img img for why the
+     blur is split out rather than baked into the grade. */
+  --emulsion-grade: sepia(.18) saturate(.86) contrast(.92) brightness(1.04) hue-rotate(-6deg);
+  --emulsion:       var(--emulsion-grade) blur(.35px);
+
   --ink-70: rgba(43, 32, 25, 0.72);
   --ink-55: rgba(43, 32, 25, 0.55);
 
@@ -327,14 +341,109 @@ a { color: inherit; }
      leaving the white band under each caption visibly uneven. */
   align-items: start;
 }
+/* ---------- The print ----------
+   Everything from here to the caption is aimed at one thing: making these
+   read as physical prints rather than photos with a white border. It splits
+   into the FRAME (.polaroid) and the EMULSION (.polaroid__img + overlays).
+   Both sections reuse it, so grade changes land everywhere at once. */
 .polaroid {
-  background: var(--white);
+  /* A pure-white border is the single biggest tell that a "print" is really
+     just a photo in a box - real stock is warm and picks up light unevenly. */
+  background: linear-gradient(166deg,
+              var(--polaroid-frame) 0%,
+              var(--polaroid-frame) 58%,
+              var(--polaroid-frame-aged) 100%);
+  /* the card is die-cut and physically thick: soft corners, plus a hairline
+     ring in the second shadow so it has a visible edge, not just a drop */
+  border-radius: 3px;
+  box-shadow: var(--shadow-photo), 0 0 0 1px rgba(94, 74, 51, .10);
   padding: 12px 12px 46px;
-  box-shadow: var(--shadow-photo);
   width: 240px;
   margin: 0;
+  /* both are for the ::after grain below: it has to sit over the whole card
+     and blend with the card only, never with the page behind it */
+  position: relative;
+  isolation: isolate;
 }
-.polaroid__img { overflow: hidden; background: var(--photo-fill); }
+/* print-surface texture across the entire card, chin included */
+.polaroid::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--grain);
+  background-size: 140px 140px;
+  mix-blend-mode: soft-light;
+  opacity: .45;
+  pointer-events: none;      /* gallery prints are clickable */
+}
+
+/* ---------- The emulsion window ---------- */
+.polaroid__img {
+  position: relative;
+  overflow: hidden;
+  background: var(--photo-fill);
+  /* contain the blend modes below, so they tint the photo and never the frame */
+  isolation: isolate;
+  /* the emulsion sits a hair inside the die-cut opening */
+  box-shadow: inset 0 0 0 1px rgba(70, 57, 44, .14);
+}
+.polaroid__img::before,
+.polaroid__img::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+/* Lifted black point - the big one. Film never resolved a true black; its
+   shadows go milky and slightly warm, and that missing depth is most of what
+   separates a print from a screen image. `lighten` clamps every pixel darker
+   than this colour up to it, which is precisely a raised black point; the
+   opacity makes it a partial lift instead of a hard floor. */
+.polaroid__img::before {
+  background: var(--emulsion-floor);
+  mix-blend-mode: lighten;
+  opacity: .5;
+}
+/* Chemistry and optics: corners fall away, the top runs warm where the
+   developer pod swept across the frame, the bottom edge drifts cool-green. */
+.polaroid__img::after {
+  background:
+    radial-gradient(118% 92% at 50% 44%, rgba(58, 42, 26, 0) 54%, rgba(58, 42, 26, .24) 100%),
+    linear-gradient(191deg, rgba(212, 164, 94, .14) 0%, rgba(212, 164, 94, 0) 40%, rgba(86, 118, 110, .12) 100%);
+  mix-blend-mode: multiply;
+}
+/* One rule for every print on the site - the per-section rules further down
+   set only the aspect ratio now. */
+.polaroid__img img,
+.polaroid__img .gallery__video {
+  display: block;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: var(--emulsion);
+  /* the blur samples transparency at the edges and leaves a pale halo just
+     inside the window; the overscale pushes that outside the clip */
+  transform: scale(1.025);
+}
+/* No two prints out of one pack develop identically, and uniformity is what
+   makes a wall of them look generated. */
+.polaroid:nth-child(2n) .polaroid__img::before { opacity: .42; }
+.polaroid:nth-child(3n) .polaroid__img::after  { opacity: .82; }
+.polaroid:nth-child(4n) .polaroid__img img { filter: var(--emulsion) saturate(.82); }
+
+/* Faded film is low-contrast by design, which is exactly the wrong trade for
+   anyone who has asked their OS for more contrast. Give them the photo. */
+@media (prefers-contrast: more) {
+  .polaroid::after,
+  .polaroid__img::before,
+  .polaroid__img::after { display: none; }
+  /* the :nth-child variants below carry higher specificity than a bare
+     .polaroid__img img, and a media query adds none - so this has to match
+     them selector-for-selector or every 4th print keeps the soft grade */
+  .polaroid__img img,
+  .polaroid:nth-child(4n) .polaroid__img img { filter: sepia(.08) saturate(1.02); transform: none; }
+}
+
 .polaroid__img svg { display: block; width: 100%; height: auto; }
 .polaroid figcaption {
   font-family: var(--type);
@@ -342,16 +451,13 @@ a { color: inherit; }
   text-align: center;
   color: var(--sepia);
   padding-top: 12px;
+  /* lift the caption above the ::after grain - texture belongs on the card,
+     not over small type this audience already reads at the size limit */
+  position: relative;
+  z-index: 1;
 }
 .about__media .polaroid { width: 100%; }
 .about__media .polaroid__img { aspect-ratio: 3 / 4; }
-.about__media .polaroid__img img {
-  display: block;
-  width: 100%; height: 100%;
-  object-fit: cover;
-  /* same warming as the gallery tiles so both read as one family */
-  filter: sepia(0.12) saturate(1.03) contrast(1.03);
-}
 /* alternating tilt + staggered baseline = hand-placed, not gridded */
 .about__media .polaroid:nth-child(1) { transform: rotate(-4deg); }
 .about__media .polaroid:nth-child(2) { transform: rotate(3deg); margin-top: 1.5rem; }
@@ -392,13 +498,6 @@ a { color: inherit; }
 }
 .gallery__item { width: 100%; }
 .gallery__item .polaroid__img { aspect-ratio: 4 / 5; }
-.gallery__item .polaroid__img img {
-  display: block;
-  width: 100%; height: 100%;
-  object-fit: cover;
-  /* warm the photos toward the site's sepia palette; dial back to taste. */
-  filter: sepia(0.12) saturate(1.03) contrast(1.03);
-}
 .gallery__item--tall .polaroid__img { aspect-ratio: 3 / 4; }
 .gallery__item--wide { grid-column: span 2; }
 .gallery__item--wide .polaroid__img { aspect-ratio: 5 / 4; }
@@ -414,15 +513,18 @@ a { color: inherit; }
 .gallery__item { transition: transform .3s ease, box-shadow .3s ease; }
 .gallery__item:hover {
   transform: rotate(0deg) translateY(-6px) scale(1.02);
-  box-shadow: 0 18px 40px rgba(58, 42, 26, 0.28);
+  /* keep the card's hairline edge - this shorthand replaces the whole stack */
+  box-shadow: 0 18px 40px rgba(58, 42, 26, 0.28), 0 0 0 1px rgba(94, 74, 51, .10);
   z-index: 3;
 }
 
-/* film tile: play badge sits over the poster/video */
-.gallery__film .polaroid__img { position: relative; }
-.gallery__video { display: block; width: 100%; height: 100%; object-fit: cover; }
+/* film tile: play badge sits over the poster/video. The window is already
+   position:relative and the video already picks up the emulsion grade from
+   the shared .polaroid__img rule, so only the badge needs handling here. */
 .gallery__play {
   position: absolute; left: 50%; top: 50%;
+  /* it is UI, not part of the photo - lift it above the emulsion overlays */
+  z-index: 2;
   width: 64px; height: 64px; margin: -32px 0 0 -32px;
   border-radius: 50%;
   background: rgba(43, 36, 32, 0.55);
@@ -495,7 +597,17 @@ a { color: inherit; }
   align-items: center;
   gap: .9rem;
 }
-.lightbox__media { background: var(--white); padding: 12px; box-shadow: var(--shadow-photo); }
+/* same stock as the tiles - if the enlargement came back on white the click
+   would "restore" the print to a modern photo and undo the whole effect */
+.lightbox__media {
+  background: linear-gradient(166deg,
+              var(--polaroid-frame) 0%,
+              var(--polaroid-frame) 58%,
+              var(--polaroid-frame-aged) 100%);
+  padding: 12px;
+  border-radius: 3px;
+  box-shadow: var(--shadow-photo), 0 0 0 1px rgba(94, 74, 51, .10);
+}
 .lightbox__img {
   display: block;
   max-width: 88vw;
@@ -503,6 +615,9 @@ a { color: inherit; }
   width: auto;
   height: auto;
   object-fit: contain;
+  /* the grade carries over, the softness does not - blur that reads as film
+     on a 240px print reads as a focus miss at full size */
+  filter: var(--emulsion-grade);
 }
 .lightbox__caption {
   font-family: var(--type);
