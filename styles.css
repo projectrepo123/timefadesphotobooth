@@ -49,7 +49,10 @@ body {
   background: var(--paper);
   overflow-x: hidden;
 }
-img, svg { max-width: 100%; }
+/* height:auto is not optional here - images carry width/height attributes, and
+   max-width alone caps the width while leaving the attribute height intact,
+   stretching them. Rules that need a filled box override it (see .polaroid__img). */
+img, svg { max-width: 100%; height: auto; }
 /* overflow-wrap keeps long serif headings from clipping on narrow screens */
 h1, h2, h3 { font-family: var(--serif); line-height: 1.12; margin: 0 0 .4em; font-weight: 600; overflow-wrap: break-word; }
 p { margin: 0 0 1rem; }
